@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import sun.applet.Main;
 
 import java.io.IOException;
 import java.net.URL;
@@ -36,7 +37,7 @@ public class OverviewCtrl implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		//POPULATE THE TABLE
-		questionTable.setItems(getQuestions());
+		questionTable.setItems(MainApp.questionObservableList);
 		titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
 		answerColumn.setCellValueFactory(new PropertyValueFactory<>("answer"));
 		valueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
@@ -44,11 +45,6 @@ public class OverviewCtrl implements Initializable{
 		questionTable.getSelectionModel().selectedItemProperty().addListener(
 				(observable, oldValue, newValue) -> showQuestion(newValue));
 		System.out.println(resources);
-	}
-
-	private ObservableList<Question> getQuestions(){
-		MainApp.questionObservableList.addAll(MainApp.currentExam.questions);
-		return MainApp.questionObservableList;
 	}
 
 	private void showQuestion(Question question){

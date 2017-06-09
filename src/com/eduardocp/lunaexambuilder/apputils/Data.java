@@ -4,6 +4,7 @@ import java.io.File;
 
 import com.eduardocp.lunaexambuilder.MainApp;
 import com.eduardocp.lunaexambuilder.model.*;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -81,6 +82,14 @@ public class Data {
 		File file = fileChooser.showSaveDialog(ps);
 		saveExamToFile(file,exam);
 
+	}
+
+	//SELECT A DIRECTORY AND GET ITS PATH
+	public static String getDirectory(Stage ps){
+		DirectoryChooser directoryChooser = new DirectoryChooser();
+		File selectedDirectory = directoryChooser.showDialog(ps);
+		//prevent nullPointerException by returning an empty String
+		return selectedDirectory == null ? "" :selectedDirectory.getAbsolutePath();
 	}
 
 }

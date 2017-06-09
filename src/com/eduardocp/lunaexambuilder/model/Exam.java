@@ -4,6 +4,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -43,4 +44,6 @@ public class Exam {
 	public void addQuestion(String title, int value,int correct, String... options){
 		questions.add(new Question(title,value,correct,options));
 	}
+
+	public void shuffle(){Collections.shuffle(questions);}
 }

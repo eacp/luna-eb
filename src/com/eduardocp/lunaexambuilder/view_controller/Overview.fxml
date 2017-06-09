@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="555.0" prefWidth="909.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.eduardocp.lunaexambuilder.view_controller.OverviewCtrl">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="40.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="NEVER" minWidth="10.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints vgrow="NEVER" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+      <RowConstraints minHeight="10.0" vgrow="NEVER" />
+  </rowConstraints>
+   <children>
+      <MenuBar GridPane.columnSpan="2147483647">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="New" />
+                  <MenuItem mnemonicParsing="false" onAction="#save" text="Save" />
+                  <MenuItem mnemonicParsing="false" onAction="#saveAs" text="Save as" />
+                  <MenuItem mnemonicParsing="false" onAction="#open" text="Open" />
+                  <Menu mnemonicParsing="false" text="Examples">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#loadBrandsExample" text="Brands" />
+                        <MenuItem mnemonicParsing="false" onAction="#loadHarryPotterExample" text="Harry Potter" />
+                        <MenuItem mnemonicParsing="false" onAction="#loadDoctorWhoExamples" text="Doctor Who" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#loadSupremeExample" text="All of the above combined" />
+                    </items>
+                  </Menu>
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Add new..." />
+                  <MenuItem mnemonicParsing="false" text="Edit..." />
+                  <MenuItem mnemonicParsing="false" onAction="#delete" text="Delete" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Export">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#goToGenerateExams" text="Generate exams" />
+               </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <TableView fx:id="questionTable" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" GridPane.rowSpan="2147483647">
+        <columns>
+          <TableColumn fx:id="titleColumn" minWidth="150.0" prefWidth="200.0" text="Question" />
+          <TableColumn fx:id="answerColumn" minWidth="30.0" prefWidth="75.0" text="Answer" />
+            <TableColumn fx:id="valueColumn" minWidth="30.0" prefWidth="75.0" text="Value" />
+        </columns>
+      </TableView>
+      <ToolBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="5">
+        <items>
+          <Button mnemonicParsing="false" onAction="#newQuestion" text="New..." />
+            <Button mnemonicParsing="false" onAction="#edit" text="Edit..." />
+            <Button mnemonicParsing="false" onAction="#delete" text="Delete" />
+        </items>
+      </ToolBar>
+      <Label text="Question Text:   " GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets left="10.0" />
+         </GridPane.margin>
+      </Label>
+      <Label text="Value:   " GridPane.columnIndex="1" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets left="10.0" />
+         </GridPane.margin>
+      </Label>
+      <Label text="Options:   " GridPane.columnIndex="1" GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets left="10.0" />
+         </GridPane.margin>
+      </Label>
+      <Label GridPane.columnIndex="2" GridPane.rowIndex="3" />
+      <Label fx:id="answerLabel" text="question.getAnswer();" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+      <Label text="Answer" GridPane.columnIndex="1" GridPane.rowIndex="4">
+         <GridPane.margin>
+            <Insets left="10.0" />
+         </GridPane.margin>
+      </Label>
+      <TextArea fx:id="optionsArea" editable="false" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets right="10.0" />
+         </GridPane.margin>
+      </TextArea>
+      <Label fx:id="valueLabel" text="" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+      <Label fx:id="titleLabel" text="" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+   </children>
+</GridPane>

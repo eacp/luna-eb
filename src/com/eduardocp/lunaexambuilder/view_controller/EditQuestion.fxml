@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane xmlns="http://javafx.com/javafx/8"
+        maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+        prefHeight="565.0" prefWidth="559.0"
+        xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="com.eduardocp.lunaexambuilder.view_controller.EditQuestionCtrl">
+
+  <columnConstraints>
+    <ColumnConstraints hgrow="NEVER" minWidth="10.0" />
+    <ColumnConstraints hgrow="NEVER" minWidth="10.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" vgrow="NEVER" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+    <RowConstraints minHeight="10.0" vgrow="NEVER" />
+    <RowConstraints maxHeight="353.0" minHeight="10.0" prefHeight="317.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="100.0" minHeight="0.0" vgrow="NEVER" />
+      <RowConstraints maxHeight="108.0" minHeight="41.0" prefHeight="81.0" vgrow="NEVER" />
+  </rowConstraints>
+   <children>
+      <Label text="Question Text:   ">
+         <GridPane.margin>
+            <Insets left="10.0" />
+         </GridPane.margin>
+      </Label>
+      <Label text="Options:" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets left="10.0" />
+         </GridPane.margin>
+      </Label>
+      <Label text="Correct:   " GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <ListView fx:id="optionsView" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets left="10.0" right="10.0" />
+         </GridPane.margin>
+      </ListView>
+      <ToolBar prefHeight="40.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="4">
+         <items>
+            <TextField fx:id="newOptionField" prefHeight="31.0" prefWidth="284.0" promptText="Write new option here" />
+            <Button mnemonicParsing="false" onAction="#addOption" text="Add" />
+            <Button mnemonicParsing="false" onAction="#deleteOption" text="Delete" />
+         </items>
+      </ToolBar>
+      <ChoiceBox fx:id="correctBox" prefWidth="9.99999999E8" GridPane.columnIndex="2" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+         </GridPane.margin>
+      </ChoiceBox>
+      <TextField fx:id="textField" GridPane.columnIndex="2">
+         <GridPane.margin>
+            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+         </GridPane.margin>
+      </TextField>
+      <HBox prefHeight="74.0" prefWidth="557.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="5">
+         <children>
+            <Button maxHeight="9.99999999E8" maxWidth="9.99999999E8" mnemonicParsing="false" onAction="#ok" scaleShape="false" style="-fx-border-radius: 0; -fx-background-color: #1cffff;" text="Ok" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="System Bold" size="32.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button maxHeight="9.99999999E8" maxWidth="9.99999999E8" mnemonicParsing="false" onAction="#cancel" scaleShape="false" style="-fx-border-radius: 0; -fx-background-color: #ff2c21;" text="Cancel" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font name="System Bold" size="32.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+      </HBox>
+      <Label text="Value:" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets left="10.0" />
+         </GridPane.margin>
+      </Label>
+      <TextField fx:id="valueField" GridPane.columnIndex="2" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+         </GridPane.margin>
+      </TextField>
+   </children>
+</GridPane>

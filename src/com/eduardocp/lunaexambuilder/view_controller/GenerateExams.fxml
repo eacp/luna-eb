@@ -6,7 +6,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <GridPane prefHeight="623.0" prefWidth="812.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.eduardocp.lunaexambuilder.view_controller.GenerateExamsCtrl">
    <rowConstraints>
       <RowConstraints vgrow="ALWAYS" />
@@ -23,7 +22,7 @@
    <children>
       <ToolBar prefHeight="40.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="4">
         <items>
-          <Button mnemonicParsing="false" text="Button">
+          <Button mnemonicParsing="false" onAction="#goToOverview" text="Return">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

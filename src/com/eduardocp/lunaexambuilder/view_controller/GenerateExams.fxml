@@ -1,34 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane prefHeight="623.0" prefWidth="812.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.eduardocp.lunaexambuilder.view_controller.GenerateExamsCtrl">
-   <rowConstraints>
-      <RowConstraints vgrow="ALWAYS" />
-      <RowConstraints vgrow="ALWAYS" />
-      <RowConstraints vgrow="ALWAYS" />
-      <RowConstraints vgrow="ALWAYS" />
-      <RowConstraints minHeight="10.0" vgrow="NEVER" />
-   </rowConstraints>
-   <columnConstraints>
-      <ColumnConstraints hgrow="ALWAYS" />
-      <ColumnConstraints hgrow="ALWAYS" />
-      <ColumnConstraints hgrow="ALWAYS" />
-   </columnConstraints>
-   <children>
-      <ToolBar prefHeight="40.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="4">
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="564.0" prefWidth="835.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <bottom>
+      <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
-          <Button mnemonicParsing="false" onAction="#goToOverview" text="Return">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
+          <Button mnemonicParsing="false" text="Return" />
+            <Button mnemonicParsing="false" text="Export" />
         </items>
       </ToolBar>
-      <Label text="Label" />
-   </children>
-</GridPane>
+   </bottom>
+   <right>
+      <TreeView prefHeight="519.0" prefWidth="491.0" BorderPane.alignment="CENTER" />
+   </right>
+   <center>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="NEVER" minWidth="10.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="NEVER" />
+          <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="NEVER" />
+            <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="NEVER" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Author: " />
+            <TextField GridPane.columnIndex="1" GridPane.columnSpan="2147483647">
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <Label text="Directory:" GridPane.rowIndex="1" />
+            <Button mnemonicParsing="false" text="Choose directory..." GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Label alignment="CENTER" contentDisplay="CENTER" text="No directory selected" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+            <Label text="Number of exams: " GridPane.columnSpan="2" GridPane.rowIndex="2" />
+            <TextField prefWidth="10.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+         </children>
+         <padding>
+            <Insets left="10.0" right="10.0" />
+         </padding>
+      </GridPane>
+   </center>
+</BorderPane>

@@ -111,7 +111,8 @@ public class OverviewCtrl implements Initializable{
 		double w = MainApp.window.getScene().getWidth(),h = MainApp.window.getScene().getHeight();
 		//load the FXML
 		Parent root = FXMLLoader.load(getClass().getResource("GenerateExams.fxml"));
-		//Set the scene in the window
+		//Set the scene in the window and the appropiate title
+		changeTitle("Generate exams");
 		MainApp.window.setScene(new Scene(root,w,h));
 	}
 	//END EXPORT-----------------------------------------------------------------------------------------------------

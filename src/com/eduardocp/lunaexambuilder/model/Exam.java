@@ -46,4 +46,16 @@ public class Exam {
 	}
 
 	public void shuffle(){Collections.shuffle(questions);}
+
+	/**
+	 * getPretty
+	 *
+	 * Returns a pretty version of the exam in a String.
+	 */
+	public String getPretty(){
+		String pretty = title + "\n" + "Author" + author + "\n\n";
+		int i = 1;
+		for (Question q: questions) {pretty+= i + ".-" + q.getTitle() + "\n" + q.getPrettyOptions() + "\n";i++;}
+		return pretty;
+	}
 }

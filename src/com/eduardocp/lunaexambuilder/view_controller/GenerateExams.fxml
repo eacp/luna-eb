@@ -18,7 +18,7 @@
       </ToolBar>
    </bottom>
    <right>
-      <TreeView prefHeight="519.0" prefWidth="491.0" BorderPane.alignment="CENTER" />
+      <TreeView fx:id="questionTreeView" prefHeight="519.0" prefWidth="491.0" BorderPane.alignment="CENTER" />
    </right>
    <center>
       <GridPane BorderPane.alignment="CENTER">
@@ -32,6 +32,7 @@
           <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="NEVER" />
           <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="NEVER" />
             <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="NEVER" />
+            <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="NEVER" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
@@ -42,16 +43,18 @@
                </GridPane.margin>
             </TextField>
             <Label text="Directory:" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" text="Choose directory..." onAction="#chooseDir" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Label alignment="CENTER" contentDisplay="CENTER" fx:id="directoryLabel" text="No directory selected" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <Button mnemonicParsing="false" onAction="#chooseDir" text="Choose directory..." GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Label fx:id="directoryLabel" alignment="CENTER" contentDisplay="CENTER" text="No directory selected" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
             <Label text="Number of exams: " GridPane.columnSpan="2" GridPane.rowIndex="3" />
-            <TextField prefWidth="10.0" fx:id="numberField" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <TextField fx:id="numberField" prefWidth="10.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
             <TextField fx:id="titleField" GridPane.columnIndex="1" GridPane.columnSpan="2147483647">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
             </TextField>
             <Label text="Title:" />
+            <Label text="Export Format" GridPane.rowIndex="4" />
+            <ChoiceBox fx:id="formatBox" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
          </children>
          <padding>
             <Insets left="10.0" right="10.0" />

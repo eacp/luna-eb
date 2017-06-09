@@ -5,14 +5,13 @@ import com.eduardocp.lunaexambuilder.apputils.Data;
 import com.eduardocp.lunaexambuilder.model.Exam;
 import com.eduardocp.lunaexambuilder.model.Question;
 import com.eduardocp.utils.Dialogs;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TreeView;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,19 +21,40 @@ import java.util.ResourceBundle;
  * Created by Eduardo on 08/06/2017.
  */
 public class GenerateExamsCtrl implements Initializable{
+	private static final String[] FORMATS = {"text","html (coming soon)","word (coming soon)","console"};
+
 	@FXML private TreeView<Question> questionTreeView;
 	@FXML private String directory;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		System.out.println(MainApp.currentExam);
+		//Set fields
 		titleField.setText(MainApp.currentExam.title);
 		authorField.setText(MainApp.currentExam.author);
+		//Set format selection box
+		formatBox.setItems(FXCollections.observableArrayList(FORMATS));
+		formatBox.getSelectionModel().select(3);
+
+		//make the tree
+		TreeItem root = new TreeItem<>("Exam");
+		root.setExpanded(true);
+		questionTreeView.setRoot(root);
+		//add each question
+		for (Question question: MainApp.questionObservableList) {
+			TreeItem<String> q = new TreeItem<>(question.getTitle());
+			for (String option: question.options) {
+				TreeItem<String> o = new TreeItem<>(option);
+				q.getChildren().add(o);
+			}
+			root.getChildren().add(q);
+		}
+		questionTreeView.setShowRoot(false);
 	}
 
 	//BEGIN LEFT SIDE---------------------------------------------------------------------------------------------------
 	@FXML private TextField titleField,authorField,numberField;
 	@FXML private Label directoryLabel;
+	@FXML private ChoiceBox<String> formatBox;
 	//END LEFT SIDE-----------------------------------------------------------------------------------------------------
 
 	//BEGIN TOOLBAR-----------------------------------------------------------------------------------------------------
@@ -47,7 +67,16 @@ public class GenerateExamsCtrl implements Initializable{
 		MainApp.window.setScene(new Scene(root,w,h));
 	}
 
+	/**
+	 * General export function
+	 *
+	 * It handles the export button click.
+	 * For each exam to export it gets throws it to the appropiate
+	 * function depending on the user selection.
+	 */
 	@FXML private void export(){
+		if (directory == null) return;
+		int selected = formatBox.getSelectionModel().getSelectedIndex();
 		try {
 			//Create temporal exam to avoid altering the original
 			Exam ex = new Exam(titleField.getText(),authorField.getText());
@@ -57,7 +86,20 @@ public class GenerateExamsCtrl implements Initializable{
 			System.out.println("-----------------------------------------------");
 			for (int i = 0; i < n; i++) {
 				ex.shuffle();
-				System.out.println(ex);
+				switch (selected){
+					case 0://text
+						//do something
+						break;
+					case 1://html
+						//do something
+						break;
+					case 2://word
+						//do something
+						break;
+					case 3://console
+						exportToConsole(ex,i+1);
+						break;
+				}
 			}
 		}catch (Exception e){
 			Dialogs.error("ERROR","Information not valid","The number of versions must be a valid number");
@@ -77,4 +119,12 @@ public class GenerateExamsCtrl implements Initializable{
 	}
 
 	//END TOOLBAR-------------------------------------------------------------------------------------------------------
+
+	//SPECIFIC EXPORT FUNCTIONS
+	//Each function exports an exam somewhere
+
+	private void exportToConsole(Exam exam, int count){
+		System.out.println("------------Export "+count+"----------------------");
+		System.out.println(exam.getPretty());
+	}
 }

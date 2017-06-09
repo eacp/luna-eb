@@ -103,6 +103,8 @@ public class OverviewCtrl implements Initializable{
 
 	//BEGIN EXPORT---------------------------------------------------------------------------------------------------
 	@FXML private void goToGenerateExams() throws IOException {
+		//Make the user save the file first
+		if (MainApp.currentFilePath == "") saveAs();
 		//Get the current width and height to make the transition consistent
 		double w = MainApp.window.getScene().getWidth(),h = MainApp.window.getScene().getHeight();
 		//load the FXML

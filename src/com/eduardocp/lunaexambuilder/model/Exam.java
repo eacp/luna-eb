@@ -53,9 +53,9 @@ public class Exam {
 	 * Returns a pretty version of the exam in a String.
 	 */
 	public String getPretty(){
-		String pretty = title + "\n" + "Author" + author + "\n\n";
+		String pretty = title + "\r\n" + "Author: " + author + "\r\n";
 		int i = 1;
-		for (Question q: questions) {pretty+= i + ".-" + q.getTitle() + "\n" + q.getPrettyOptions() + "\n";i++;}
+		for (Question q: questions) {pretty+= i + ".-" + q.getTitle() + "\r\n" + q.getPrettyOptions() + "\r\n";i++;}
 		return pretty;
 	}
 }

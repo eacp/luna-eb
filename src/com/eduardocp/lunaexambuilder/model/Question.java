@@ -40,7 +40,7 @@ public class Question {
 
 	public String getPrettyOptions(){
 		String pretty = "";int s = options.size();
-		for (int i = 0; i < s; i++) {pretty += ALPHABET[i] + ") " + options.get(i) + "\n";}
+		for (int i = 0; i < s; i++) {pretty += ALPHABET[i] + ") " + options.get(i) + "\r\n";}
 		return pretty;
 	}
 

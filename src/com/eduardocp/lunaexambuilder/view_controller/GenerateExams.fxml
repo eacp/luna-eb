@@ -18,7 +18,7 @@
       </ToolBar>
    </bottom>
    <right>
-      <TreeView fx:id="questionTreeView" prefHeight="519.0" prefWidth="491.0" BorderPane.alignment="CENTER" />
+      <TreeView fx:id="questionTreeView" prefHeight="519.0" prefWidth="558.0" BorderPane.alignment="CENTER" />
    </right>
    <center>
       <GridPane BorderPane.alignment="CENTER">

@@ -12,10 +12,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
+import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.io.*;
 
 /**
  * Created by Eduardo on 08/06/2017.
@@ -46,6 +50,7 @@ public class GenerateExamsCtrl implements Initializable{
 				TreeItem<String> o = new TreeItem<>(option);
 				q.getChildren().add(o);
 			}
+			q.setExpanded(true);
 			root.getChildren().add(q);
 		}
 		questionTreeView.setShowRoot(false);
@@ -88,7 +93,8 @@ public class GenerateExamsCtrl implements Initializable{
 				ex.shuffle();
 				switch (selected){
 					case 0://text
-						//do something
+						exportToTextFile(ex,i+1);
+						Desktop.getDesktop().open(new File(directory));
 						break;
 					case 1://html
 						//do something
@@ -126,5 +132,16 @@ public class GenerateExamsCtrl implements Initializable{
 	private void exportToConsole(Exam exam, int count){
 		System.out.println("------------Export "+count+"----------------------");
 		System.out.println(exam.getPretty());
+	}
+
+	public void  exportToTextFile(Exam exam,int count){
+		try {
+			BufferedWriter out = new BufferedWriter(new FileWriter(directory+"\\"+count+".txt"));
+			out.write(exam.getPretty());
+			out.close();
+		}
+		catch (IOException e){
+			System.out.println("Exception ");
+		}
 	}
 }

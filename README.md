@@ -1,37 +1,8 @@
-## Welcome to GitHub Pages
+# Luna Exam Builder
 
-You can use the [editor on GitHub](https://github.com/eacp/Luna-Exam-Builder/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+This is an aplication designed to help teachers or every person in general to create multiple quizzes with just one click. It can randomly generate many versions of an exam by just entering the individual questions with its options. 
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## History
+The first version of this application was a class project for a contest when I was in High School back in May 2017. The application got me the first place. The first version was very sinple and only printed the exams in the screen, and only allowed 4 choices per question. Then I decided to continue the project in my free time to help people who might like to use this toool. I continued to develop it until this day.
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/eacp/Luna-Exam-Builder/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+## Usage

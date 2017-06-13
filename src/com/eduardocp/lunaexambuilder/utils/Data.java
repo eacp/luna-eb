@@ -1,4 +1,4 @@
-package com.eduardocp.lunaexambuilder.apputils;
+package com.eduardocp.lunaexambuilder.utils;
 
 import java.io.File;
 

@@ -2,7 +2,7 @@ package com.eduardocp.lunaexambuilder.view_controller;
 
 import com.eduardocp.lunaexambuilder.MainApp;
 import com.eduardocp.lunaexambuilder.model.Question;
-import com.eduardocp.utils.Dialogs;
+import com.eduardocp.lunaexambuilder.utils.Dialogs;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

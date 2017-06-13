@@ -1,10 +1,8 @@
 package com.eduardocp.lunaexambuilder.view_controller;
 
 import com.eduardocp.lunaexambuilder.MainApp;
-import com.eduardocp.lunaexambuilder.apputils.Data;
-import com.eduardocp.lunaexambuilder.model.Exam;
-import com.eduardocp.lunaexambuilder.model.Question;
-import com.eduardocp.utils.Dialogs;
+import com.eduardocp.lunaexambuilder.utils.*;
+import com.eduardocp.lunaexambuilder.model.*;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,8 +10,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 
 import java.awt.Desktop;
 import java.io.IOException;
@@ -28,6 +24,7 @@ public class GenerateExamsCtrl implements Initializable{
 	private static final String[] FORMATS = {"text","html (coming soon)","word (coming soon)","console"};
 
 	@FXML private TreeView<Question> questionTreeView;
+	//this String holds the path to the directory where the
 	@FXML private String directory;
 
 	@Override
@@ -87,10 +84,10 @@ public class GenerateExamsCtrl implements Initializable{
 			Exam ex = new Exam(titleField.getText(),authorField.getText());
 			for (Question q: MainApp.questionObservableList) {ex.questions.add(q);}
 			int n = Integer.parseInt(numberField.getText());
-			System.out.println(ex);
-			System.out.println("-----------------------------------------------");
 			for (int i = 0; i < n; i++) {
+				//shuffle this exam to reorder the questions in a random order
 				ex.shuffle();
+				//do the correct action depending on the seleceted format
 				switch (selected){
 					case 0://text
 						exportToTextFile(ex,i+1);

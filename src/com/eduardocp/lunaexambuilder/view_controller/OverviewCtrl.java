@@ -1,10 +1,9 @@
 package com.eduardocp.lunaexambuilder.view_controller;
 
 import com.eduardocp.lunaexambuilder.MainApp;
-import com.eduardocp.lunaexambuilder.apputils.*;
+import com.eduardocp.lunaexambuilder.utils.*;
 import com.eduardocp.lunaexambuilder.model.*;
-import com.eduardocp.utils.Dialogs;
-import javafx.collections.ObservableList;
+import com.eduardocp.lunaexambuilder.utils.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -13,7 +12,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import sun.applet.Main;
 
 import java.io.IOException;
 import java.net.URL;

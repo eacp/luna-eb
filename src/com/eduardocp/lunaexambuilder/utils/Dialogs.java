@@ -1,6 +1,5 @@
 package com.eduardocp.lunaexambuilder.utils;
 
-
 import java.util.Optional;
 
 import javafx.scene.control.Alert;

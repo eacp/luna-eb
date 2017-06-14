@@ -58,4 +58,11 @@ public class Exam {
 		for (Question q: questions) {pretty+= i + ".-" + q.getTitle() + "\r\n" + q.getPrettyOptions() + "\r\n";i++;}
 		return pretty;
 	}
+
+	public String getAnswers() {
+		String answers = "";
+		int i = 1;
+		for (Question question: questions) {answers += i + question.getCorrectLetter();i++;}
+		return answers;
+	}
 }

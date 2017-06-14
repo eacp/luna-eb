@@ -14,6 +14,8 @@ import javafx.scene.control.*;
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.io.*;
 
@@ -22,6 +24,9 @@ import java.io.*;
  */
 public class GenerateExamsCtrl implements Initializable{
 	private static final String[] FORMATS = {"text","html (coming soon)","word (coming soon)","console"};
+
+	//a list to hold the answers to the exams
+	private List<String> answers = new ArrayList<>();
 
 	@FXML private TreeView<Question> questionTreeView;
 	//this String holds the path to the directory where the
@@ -77,6 +82,8 @@ public class GenerateExamsCtrl implements Initializable{
 	 * function depending on the user selection.
 	 */
 	@FXML private void export(){
+		//clear the answers from any possible previous export
+		answers.clear();
 		if (directory == null) return;
 		int selected = formatBox.getSelectionModel().getSelectedIndex();
 		try {
@@ -91,19 +98,22 @@ public class GenerateExamsCtrl implements Initializable{
 				switch (selected){
 					case 0://text
 						exportToTextFile(ex,i+1);
-						Desktop.getDesktop().open(new File(directory));
-						break;
-					case 1://html
-						//do something
-						break;
-					case 2://word
-						//do something
 						break;
 					case 3://console
 						exportToConsole(ex,i+1);
 						break;
 				}
+				//add the answers from this exam to the answers
+				answers.add(ex.getAnswers());
 			}
+			//generate the answers file
+			BufferedWriter answersFile = new BufferedWriter(new FileWriter(directory+"\\ANSWERS.txt"));
+			int s = answers.size();
+			for (int i = 0; i < s; i++) {answersFile.write("Version " + (i+1) + ": " + answers.get(i) + "\r\n");}
+			answersFile.close();
+			//Open the containing folder for the export. Every export
+			//will generate files except the console. But console is just for debugging anyways
+			Desktop.getDesktop().open(new File(directory));
 		}catch (Exception e){
 			Dialogs.error("ERROR","Information not valid","The number of versions must be a valid number");
 		}

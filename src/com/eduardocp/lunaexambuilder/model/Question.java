@@ -53,4 +53,8 @@ public class Question {
 	@XmlAttribute
 	public int getCorrect() {return correct;}
 	public void setCorrect(int correct) {this.correct = correct;}
+
+	public String getCorrectLetter() {
+		return ALPHABET[correct]+"";
+	}
 }

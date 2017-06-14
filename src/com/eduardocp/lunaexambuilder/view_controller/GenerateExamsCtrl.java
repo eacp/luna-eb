@@ -14,6 +14,7 @@ import javafx.scene.control.*;
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URL;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -34,12 +35,17 @@ public class GenerateExamsCtrl implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+
 		//Set fields
 		titleField.setText(MainApp.currentExam.title);
 		authorField.setText(MainApp.currentExam.author);
 		//Set format selection box
 		formatBox.setItems(FXCollections.observableArrayList(FORMATS));
 		formatBox.getSelectionModel().select(3);
+		//set max export label
+		System.out.println(MainApp.questionObservableList.size());
+		int max = factorial(MainApp.questionObservableList.size());
+		maxExportLabel.setText("You can generate up to "+ NumberFormat.getIntegerInstance().format(max) + " different exams");
 
 		//make the tree
 		TreeItem root = new TreeItem<>("Exam");
@@ -60,7 +66,7 @@ public class GenerateExamsCtrl implements Initializable{
 
 	//BEGIN LEFT SIDE---------------------------------------------------------------------------------------------------
 	@FXML private TextField titleField,authorField,numberField;
-	@FXML private Label directoryLabel;
+	@FXML private Label directoryLabel,maxExportLabel;
 	@FXML private ChoiceBox<String> formatBox;
 	//END LEFT SIDE-----------------------------------------------------------------------------------------------------
 
@@ -143,7 +149,7 @@ public class GenerateExamsCtrl implements Initializable{
 
 	public void  exportToTextFile(Exam exam,int count){
 		try {
-			BufferedWriter out = new BufferedWriter(new FileWriter(directory+"\\"+count+".txt"));
+			BufferedWriter out = new BufferedWriter(new FileWriter(directory+"\\Version "+count+".txt"));
 			out.write(exam.getPretty());
 			out.close();
 		}
@@ -151,4 +157,8 @@ public class GenerateExamsCtrl implements Initializable{
 			System.out.println("Exception ");
 		}
 	}
+
+	//factorial function
+	private int factorial (int n) {return (n==0) ? 1 : n*factorial(n-1);}
+
 }

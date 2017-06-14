@@ -82,6 +82,7 @@ public class EditQuestionCtrl{
 			MainApp.questionObservableList.set(MainApp.currentEditingQuestionIndex,q);
 		}
 		okClicked = true;
+		MainApp.currentExam.questions = MainApp.questionObservableList;
 		dialogStage.close();
 	}
 

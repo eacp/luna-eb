@@ -62,7 +62,7 @@ public class MainApp extends Application {
 			Scene scene = new Scene(page);
 			dialogStage.setScene(scene);
 			dialogStage.setWidth(450);
-			dialogStage.setHeight(600);
+			dialogStage.setHeight(700);
 			dialogStage.setResizable(false);
 
 			// Set the question into the controller.

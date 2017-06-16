@@ -2,14 +2,18 @@ package com.eduardocp.lunaexambuilder.view_controller;
 
 import com.eduardocp.lunaexambuilder.MainApp;
 import com.eduardocp.lunaexambuilder.model.Question;
+import com.eduardocp.lunaexambuilder.utils.Data;
 import com.eduardocp.lunaexambuilder.utils.Dialogs;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
+import javax.print.DocFlavor;
 
 /**
  * Created by Eduardo on 06/06/2017.
@@ -25,6 +29,7 @@ public class EditQuestionCtrl{
 	@FXML private TextField valueField;
 	@FXML private ChoiceBox<String> correctBox;
 	@FXML private ListView<String> optionsView;
+	@FXML private Label img;
 	//TOOLBAR
 	@FXML private TextField newOptionField;
 
@@ -57,6 +62,8 @@ public class EditQuestionCtrl{
 		valueField.setText(Integer.toString(question.getValue()));
 		optionsList.setAll(question.options);
 		correctBox.getSelectionModel().select(question.getCorrect());
+		img.setText(question.getImg());
+
 	}
 
 	@FXML
@@ -75,6 +82,9 @@ public class EditQuestionCtrl{
 		Question q = new Question(text,value,correct,"");
 		//add the options
 		q.options = optionsList;
+		//add the image path
+		q.setImg(img.getText());
+
 		//if the user is editing a question, update , else add new question
 		if (MainApp.currentEditingQuestionIndex < 0){
 			MainApp.questionObservableList.add(q);
@@ -84,6 +94,11 @@ public class EditQuestionCtrl{
 		okClicked = true;
 		MainApp.currentExam.questions = MainApp.questionObservableList;
 		dialogStage.close();
+	}
+
+	@FXML private void chooseImage(){
+		String imagePath = Data.getFilePath(dialogStage);
+		img.setText(imagePath);
 	}
 
 	@FXML

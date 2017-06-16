@@ -11,13 +11,17 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class OverviewCtrl implements Initializable{
+	private Image noImage;
 
 	//BEGIN TABLE-------------------------------------------------------------------------------------------------------
 	@FXML private TableView<Question> questionTable;
@@ -29,11 +33,13 @@ public class OverviewCtrl implements Initializable{
 
 	//BEGIN DETAIL AREA-------------------------------------------------------------------------------------------------
 	@FXML private Label titleLabel, valueLabel, answerLabel;
+	@FXML private ImageView image;
 	@FXML private TextArea optionsArea;
 	//END DETAIL AREA---------------------------------------------------------------------------------------------------
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		noImage = new Image(MainApp.class.getResourceAsStream("resources/no-image.jpg"));
 		//POPULATE THE TABLE
 		questionTable.setItems(MainApp.questionObservableList);
 		titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
@@ -51,6 +57,14 @@ public class OverviewCtrl implements Initializable{
 			valueLabel.setText(Integer.toString(question.getValue()));
 			optionsArea.setText(question.getPrettyOptions());
 			answerLabel.setText(question.getAnswer());
+			try {
+				//if there is a valid image, put the valid image
+				image.setImage(new Image(new FileInputStream(question.getImg())));
+			}catch (Exception e){
+				//put the empty image
+				image.setImage(noImage);
+				System.out.println("Object has no valid img");
+			}
 		}else{
 			titleLabel.setText("");
 			valueLabel.setText("");

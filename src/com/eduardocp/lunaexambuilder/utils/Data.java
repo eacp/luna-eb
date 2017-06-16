@@ -92,4 +92,12 @@ public class Data {
 		return selectedDirectory == null ? "" :selectedDirectory.getAbsolutePath();
 	}
 
+	//SELECT A FILE AND GET ITS PATH
+	public static String getFilePath(Stage ps){
+		FileChooser fc = new FileChooser();
+		File selectedFile = fc.showOpenDialog(ps);
+		//prevent nullPointerException by returning an empty String
+		return selectedFile == null ? "" :selectedFile.getAbsolutePath();
+	}
+
 }

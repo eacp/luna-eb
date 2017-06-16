@@ -16,6 +16,7 @@ public class Question {
 	private String title;
 	private int value = 1;
 	private int correct;
+	private String img;
 	@XmlElement(name = "option")
 	public List<String> options = new ArrayList<>();
 
@@ -53,6 +54,9 @@ public class Question {
 	@XmlAttribute
 	public int getCorrect() {return correct;}
 	public void setCorrect(int correct) {this.correct = correct;}
+	@XmlAttribute
+	public String getImg() {return img;}
+	public void setImg(String img) {this.img = img;}
 
 	public String getCorrectLetter() {
 		return ALPHABET[correct]+"";

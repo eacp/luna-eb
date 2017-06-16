@@ -2,6 +2,7 @@ package com.eduardocp.lunaexambuilder;
 
 import com.eduardocp.lunaexambuilder.model.Exam;
 import com.eduardocp.lunaexambuilder.model.Question;
+import com.eduardocp.lunaexambuilder.utils.Data;
 import com.eduardocp.lunaexambuilder.view_controller.EditQuestionCtrl;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -14,7 +15,11 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.Scanner;
 
 public class MainApp extends Application {
 	//MYSTIC CONSTANTS
@@ -44,7 +49,7 @@ public class MainApp extends Application {
     }
 
 
-    public static void main(String[] args) {launch(args);}
+    public static void main(String[] args){launch(args);}
 
     public static boolean showEditQuestionDialog(Stage ps,Question question,String title){
 		try {

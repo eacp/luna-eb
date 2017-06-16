@@ -1,6 +1,10 @@
 package com.eduardocp.lunaexambuilder.utils;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
 
 import com.eduardocp.lunaexambuilder.MainApp;
 import com.eduardocp.lunaexambuilder.model.*;
@@ -100,4 +104,20 @@ public class Data {
 		return selectedFile == null ? "" :selectedFile.getAbsolutePath();
 	}
 
+	//load a text file from the resources folder
+	//Stupid Scanner Trick
+	public static String getTxtResource(String resource){
+		try {
+			return new Scanner(MainApp.class.getResourceAsStream("resources/"+resource), "UTF-8").useDelimiter("\\A").next();
+		}catch (Exception e){return "";}
+	}
+
+	//Write a String to a text file
+	public static void writeToTextFile(String text,String path){
+		try {
+			BufferedWriter out = new BufferedWriter(new FileWriter(path));
+			out.write(text);
+			out.close();
+		}catch (IOException e){System.out.println("Exception ");}
+	}
 }

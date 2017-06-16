@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.io.*;
@@ -90,39 +91,61 @@ public class GenerateExamsCtrl implements Initializable{
 	@FXML private void export(){
 		//clear the answers from any possible previous export
 		answers.clear();
-		if (directory == null) return;
+
+		//check if directory is null
+		if (directory == null){
+			Dialogs.error("ERROR","Empty folder","You must select a folder first");
+			return;
+		}
+
+		//check if number is valid
 		int selected = formatBox.getSelectionModel().getSelectedIndex();
-		try {
-			//Create temporal exam to avoid altering the original
-			Exam ex = new Exam(titleField.getText(),authorField.getText());
-			for (Question q: MainApp.questionObservableList) {ex.questions.add(q);}
-			int n = Integer.parseInt(numberField.getText());
-			for (int i = 0; i < n; i++) {
-				//shuffle this exam to reorder the questions in a random order
-				ex.shuffle();
-				//do the correct action depending on the seleceted format
-				switch (selected){
-					case 0://text
-						exportToTextFile(ex,i+1);
-						break;
-					case 3://console
-						exportToConsole(ex,i+1);
-						break;
-				}
-				//add the answers from this exam to the answers
-				answers.add(ex.getAnswers());
+		if (isNan(numberField.getText())){
+			Dialogs.error("ERROR","Information not valid","The number of versions must be a valid number");
+			return;
+		}
+		// is valid
+		int n = Integer.parseInt(numberField.getText());
+
+		//Create temporal exam to avoid altering the original
+		Exam ex = new Exam(titleField.getText(),authorField.getText());
+		ex.questions.addAll(MainApp.questionObservableList);
+
+		//export according to selected format
+		for (int i = 0; i < n; i++) {
+			//shuffle this exam to reorder the questions in a random order
+			ex.shuffle();
+			//do the correct action depending on the selected format
+			switch (selected){
+				case 0://text
+					exportToTextFile(ex,i+1);
+					break;
+				case 1://html
+					//this is the first export, create all the pertinent files first
+					if (i==0){createNecessaryFilesForHTML();}
+					exportToHTML(ex,i+1);
+					break;
+				case 3://console
+					exportToConsole(ex,i+1);
+					break;
 			}
+			//add the answers from this exam to the answers
+			answers.add(ex.getAnswers());
+		}
+
+		try {
 			//generate the answers file
 			BufferedWriter answersFile = new BufferedWriter(new FileWriter(directory+"\\ANSWERS.txt"));
 			int s = answers.size();
 			for (int i = 0; i < s; i++) {answersFile.write("Version " + (i+1) + ": " + answers.get(i) + "\r\n");}
 			answersFile.close();
-			//Open the containing folder for the export. Every export
-			//will generate files except the console. But console is just for debugging anyways
+
+			//Open the containing folder for the export.
 			Desktop.getDesktop().open(new File(directory));
 		}catch (Exception e){
-			Dialogs.error("ERROR","Information not valid","The number of versions must be a valid number");
+			e.printStackTrace();
 		}
+
 	}
 
 	@FXML
@@ -147,18 +170,77 @@ public class GenerateExamsCtrl implements Initializable{
 		System.out.println(exam.getPretty());
 	}
 
-	public void  exportToTextFile(Exam exam,int count){
-		try {
-			BufferedWriter out = new BufferedWriter(new FileWriter(directory+"\\Version "+count+".txt"));
-			out.write(exam.getPretty());
-			out.close();
-		}
-		catch (IOException e){
-			System.out.println("Exception ");
-		}
+	private void  exportToTextFile(Exam exam,int count){
+		Data.writeToTextFile(exam.getPretty(),directory+"\\Version "+count+".txt");
 	}
 
+	private void exportToHTML(Exam exam,int count){
+		//the images and the bootstrap file are ready. render a HTML file
+		String template = Data.getTxtResource("exam.html");
+		//replace the title and the author
+		template = template.replaceAll("#title",exam.title);
+		template = template.replaceAll("#author",exam.author);
+		//begin creating the list
+		List<String> questionListItems = new ArrayList<>(exam.questions.size());
+		for (Question q: exam.questions) {
+			String li = "<li>\r\n" + q.getTitle() + "\r\n";
+			//if the questions has an IMG, add the IMG
+			if (q.getImg() != null){
+				String imgElement = "<br><img src='SOURCE'/>";
+				//get the file name
+				String[] s = q.getImg().split("\\\\");
+				String fileName = s[s.length-1];
+				//put in in the element
+				imgElement=imgElement.replaceAll("SOURCE",fileName);
+				//put the element in the li
+				li+=imgElement;
+			}
+			//create an internal ol to pack inside the options
+			String internalOl = "<ol type=\"a\">\r\n";
+			for (String option: q.options) {
+				internalOl+="<li>"+option+"</li>";
+			}
+			internalOl+="</ol>";
+			li+=internalOl;
+			li += "</li><br>";
+			questionListItems.add(li);
+		}
+		String joined = String.join("\r\n",questionListItems);
+		String html = template.replaceAll("#questions",joined);
+		Data.writeToTextFile(html,directory+"\\Version "+count+".html");
+	}
+
+	private void createNecessaryFilesForHTML(){
+		//create bootstrap.min.css
+		Data.writeToTextFile(Data.getTxtResource("bootstrap.min.css"),directory+"\\bootstrap.min.css");
+		//create all the images
+		for (Question question: MainApp.questionObservableList) {
+			if (question.getImg() == null){
+				continue;
+			}
+			//get the file name
+			String[] s = question.getImg().split("\\\\");
+			System.out.println(s);
+			String fileName = s[s.length-1];
+			//BEGIN HUGE WTF
+			InputStream is = null;OutputStream os = null;
+			try {
+				System.out.println(fileName);
+				is = new FileInputStream(question.getImg());
+				os = new FileOutputStream(directory + "\\" + fileName);
+				byte[] buffer = new byte[1024];
+				int length;
+				while ((length = is.read(buffer)) > 0) {os.write(buffer, 0, length);}
+				is.close();
+				os.close();
+			} catch (Exception e){
+				System.out.println("CREATE NECESSARY FILES");
+			}
+			//END HUGE WTF
+		}
+	}
 	//factorial function
 	private int factorial (int n) {return (n==0) ? 1 : n*factorial(n-1);}
-
+	//isNan function
+	private boolean isNan(String n){try {Integer.parseInt(n);return false;}catch (Exception e){return true;}}
 }

@@ -186,7 +186,7 @@ public class GenerateExamsCtrl implements Initializable{
 			String li = "<li>\r\n" + q.getTitle() + "\r\n";
 			//if the questions has an IMG, add the IMG
 			if (q.getImg() != null){
-				String imgElement = "<br><img src='SOURCE'/>";
+				String imgElement = "<br><img class='img' src='SOURCE'/>";
 				//get the file name
 				String[] s = q.getImg().split("\\\\");
 				String fileName = s[s.length-1];

@@ -3,7 +3,6 @@ package com.eduardocp.lunaexambuilder.view_controller;
 import com.eduardocp.lunaexambuilder.MainApp;
 import com.eduardocp.lunaexambuilder.utils.*;
 import com.eduardocp.lunaexambuilder.model.*;
-import com.eduardocp.lunaexambuilder.utils.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;

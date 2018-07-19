@@ -23,3 +23,6 @@ You can save the exam to an XML file and also you can export multiple versions t
 
 This is how the HTML version looks like
 ![Image 4: Export to HTML assistant](screenshots/ss-export02.png)
+
+## Future
+I plan to create a custom file format, probably `.lunaexam` or `.exam` to allow easier sharing and storage of data. It will be based on `.zip` and will contain the exam data in XML and the images inside a ZIP. TLDR; a zip folder with another name
